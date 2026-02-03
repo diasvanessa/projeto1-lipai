@@ -10,12 +10,14 @@ Sistema para gerenciar alunos, projetos e participações em projetos de inicia�
    ```bash
    git clone https://github.com/diasvanessa/projeto1-lipai
 3. Acesse a pasta raiz do projeto:
+   ```bash
     cd projeto1-lipai
-4. Execute o arquivo principal com o comando:
+5. Execute o arquivo principal com o comando:
+   ```bash
     python src/main.py
 
 ### Estrutura de diretorios
-
+```bash
 projeto1-lipai/
 ├── .vscode/                # Configurações do VS Code
 ├── data/                   # Arquivos de dados do projeto
