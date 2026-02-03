@@ -1,8 +1,10 @@
+"""Módulo que define os menus para cadastro, listagem e busca de alunos, projetos e participações."""
+
+import os
 from models.aluno import Aluno
 from services.services import RepositorioAlunos, RepositorioProjetos, RepositorioParticipacoes
 from models.participacao import Participacao
 from models.projeto import Projeto
-import os
 
 repositorio_alunos = RepositorioAlunos()
 repositorio_alunos.carregar_alunos()
@@ -19,6 +21,7 @@ def cadastrar():
     print("1. Aluno")
     print("2. Projeto")
     print("3. Participação")
+    print("4. Voltar ao menu principal")
     escolha = input("Escolha uma opção: ")
     if escolha == "1":
         cadastrar_aluno()
@@ -26,6 +29,8 @@ def cadastrar():
         cadastrar_projeto()
     elif escolha == "3":
         cadastrar_participacao()
+    elif escolha == "4":
+        return
     else:
         print("Opção inválida.")
 
@@ -36,6 +41,7 @@ def listar():
     print("1. Aluno")
     print("2. Projeto")
     print("3. Participação")
+    print("4. Voltar ao menu principal")
     escolha = input("Escolha uma opção: ")
     if escolha == "1":
         listar_alunos()
@@ -43,14 +49,18 @@ def listar():
         listar_projetos()
     elif escolha == "3":
         listar_participacoes()
+    elif escolha == "4":
+        return
     else:
         print("Opção inválida.")
 
 def buscar():
+    """ Função para chamar as funcoes de buscar alunos, projetos ou participações. """
     print("Deseja buscar:")
     print("1. Aluno")
     print("2. Projeto")
     print("3. Participação")
+    print("4. Voltar ao menu principal")    
     escolha = input("Escolha uma opção: ")
     if escolha == "1":
         buscar_aluno()
@@ -58,6 +68,8 @@ def buscar():
         buscar_projeto()
     elif escolha == "3":
         buscar_participacao()
+    elif escolha == "4":
+        return
     else:
         print("Opção inválida.")
 
@@ -85,7 +97,8 @@ def cadastrar_aluno():
 def listar_alunos():
     """ Função para listar todos os alunos cadastrados. """
     alunos = repositorio_alunos.listar_alunos()
-    print(alunos)
+    for aluno in alunos:
+        print(aluno)
 
 
 def buscar_aluno():
@@ -119,7 +132,8 @@ def cadastrar_projeto():
 def listar_projetos():
     """ Função para listar todos os projetos cadastrados. """
     projetos = repositorio_projetos.listar_projetos()
-    print(projetos)
+    for projeto in projetos:
+        print(projeto)
     
 def buscar_projeto():
     """ Função para buscar um projeto pelo código. """
@@ -149,6 +163,7 @@ def cadastrar_participacao():
             data_fim = input("Digite a data de fim da participação (DD/MM/AAAA): ")
             participacao = Participacao(data_inicio, data_fim, aluno, projeto)
             repositorio_participacoes.adicionar_participacao(participacao)
+            repositorio_projetos.adicionar_participacao_ao_projeto(codigo, participacao)
             escolha = input("Deseja cadastrar outra participação? (s/n): ").lower()
             if escolha == 's':
                 continue
@@ -161,7 +176,8 @@ def cadastrar_participacao():
 def listar_participacoes():
     """ Função para listar todas as participações cadastradas. """
     participacoes = repositorio_participacoes.listar_participacoes()
-    print(participacoes)
+    for participacao in participacoes:
+        print(participacao)
     
 def buscar_participacao():
     """ Funcao para buscar todos os alunos participantes de um projeto ou
@@ -174,14 +190,16 @@ def buscar_participacao():
         matricula = input("Digite a matrícula do aluno: ")
         participacoes = repositorio_participacoes.buscar_participacoes_por_aluno(matricula)
         if participacoes:
-            print(f"Participações encontradas: {participacoes}")
+            for participacao in participacoes:
+                print(participacao)
         else:
             print("Nenhuma participação encontrada para esse aluno.")
     elif escolha == "2":
         codigo = int(input("Digite o código do projeto: "))
         participacoes = repositorio_participacoes.buscar_participacoes_por_projeto(codigo)
         if participacoes:
-            print(f"Alunos participantes encontrados: {participacoes}")
+            for participacao in participacoes:
+                print(participacao)
         else:
             print("Nenhum aluno encontrado para esse projeto.")
             

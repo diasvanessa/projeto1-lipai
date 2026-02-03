@@ -1,3 +1,5 @@
+"""Módulo principal que exibe o menu e chama as funções apropriadas."""
+
 from menus import cadastrar, listar, buscar
 
 def menu():

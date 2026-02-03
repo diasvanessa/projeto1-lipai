@@ -1,7 +1,8 @@
+"""Módulo que define a classe Participacao."""
+
+import uuid
 from models.aluno import Aluno
 from models.projeto import Projeto
-import uuid
-
 
 class Participacao:
     """Classe que representa a participação de um aluno em um projeto,
@@ -13,12 +14,13 @@ class Participacao:
         self.aluno = aluno
         self.projeto = projeto
         if codigo is None:
-            self.codigo = uuid.uuid4().hex[:8]
+            self.codigo = uuid.uuid4().hex[:8] # Gera um código único curto
         else:
             self.codigo = codigo
 
     @property
     def codigo(self):
+        """ Retorna o código da participação. """
         return self._codigo
 
     @codigo.setter
@@ -29,6 +31,7 @@ class Participacao:
 
     @property
     def data_inicio(self):
+        """ Retorna a data de início da participação. """
         return self._data_inicio
 
     @data_inicio.setter
@@ -39,6 +42,7 @@ class Participacao:
 
     @property
     def data_fim(self):
+        """ Retorna a data de fim da participação. """
         return self._data_fim
 
     @data_fim.setter
@@ -51,6 +55,7 @@ class Participacao:
 
     @property
     def aluno(self):
+        """ Retorna o aluno da participação. """
         return self._aluno
 
     @aluno.setter
@@ -61,6 +66,7 @@ class Participacao:
 
     @property
     def projeto(self):
+        """ Retorna o projeto da participação. """
         return self._projeto
 
     @projeto.setter
@@ -71,6 +77,7 @@ class Participacao:
 
     @classmethod
     def from_string(cls, rep_participacao, aluno, projeto):
+        """ Cria uma instância de participacao a partir de uma string. """
         codigo, data_inicio, data_fim = rep_participacao.split(sep=",")
         return cls(data_inicio, data_fim, aluno, projeto, codigo)
 

@@ -1,3 +1,5 @@
+"""Módulo que define a classe Projeto."""
+
 class Projeto:
     """Classe que representa um projeto, codigo (int), titulo, 
     responsavel, lista de participacoes"""
@@ -10,6 +12,7 @@ class Projeto:
 
     @property
     def codigo(self):
+        """ Retorna o código do projeto. """
         return self._codigo
 
     @codigo.setter
@@ -21,6 +24,7 @@ class Projeto:
 
     @property
     def titulo(self):
+        """ Retorna o título do projeto. """
         return self._titulo
 
     @titulo.setter
@@ -31,6 +35,7 @@ class Projeto:
 
     @property
     def responsavel(self):
+        """ Retorna o responsável pelo projeto. """
         return self._responsavel
 
     @responsavel.setter
@@ -40,10 +45,12 @@ class Projeto:
         self._responsavel = valor
 
     def adicionar_participacao(self, participacao):
+        """ Adiciona uma participação ao projeto. """
         self.participacoes.append(participacao)
 
     @classmethod
     def from_string(cls, rep_projeto):
+        """ Cria uma instância de projeto a partir de uma string. """
         codigo, titulo, responsavel = rep_projeto.split(sep=",")
         codigo = int(codigo)
         return cls(codigo, titulo, responsavel)
@@ -62,9 +69,9 @@ class Projeto:
     def __str__(self):
             texto = f"Projeto {self.codigo}: {self.titulo} (Resp: {self.responsavel})"
             if self.participacoes:
-                texto += "\n   Participações:"
+                texto += "\n   Alunos participantes:"
                 for p in self.participacoes:
-                    texto += f"\n    -> {p}" 
+                    texto += f"\n    -> {p.aluno.nome} (Matrícula: {p.aluno.matricula}) - Início: {p.data_inicio}, Fim: {p.data_fim}" 
             else:
                 texto += "\n   (Nenhuma participação cadastrada)"
             return texto
