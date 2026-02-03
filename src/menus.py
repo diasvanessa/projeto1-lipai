@@ -99,7 +99,7 @@ def listar_alunos():
     alunos = repositorio_alunos.listar_alunos()
     for aluno in alunos:
         print(aluno)
-
+    input("Pressione Enter para continuar...")
 
 def buscar_aluno():
     """ Função para buscar um aluno pela matrícula. """
@@ -109,6 +109,7 @@ def buscar_aluno():
         print(f"Aluno encontrado: {aluno}")
     else:
         print("Aluno não encontrado.")
+    input("Pressione Enter para continuar...")
 
 def cadastrar_projeto():
     """ Função para cadastrar um projeto. """
@@ -134,15 +135,21 @@ def listar_projetos():
     projetos = repositorio_projetos.listar_projetos()
     for projeto in projetos:
         print(projeto)
+    input("Pressione Enter para continuar...")
     
 def buscar_projeto():
     """ Função para buscar um projeto pelo código. """
-    codigo = int(input("Digite o código do projeto que deseja buscar: "))
+    try:
+        codigo = int(input("Digite o código do projeto que deseja buscar: "))
+    except ValueError:
+        print("Código inválido. Digite apenas números.")
+        return
     projeto = repositorio_projetos.buscar_projeto(codigo)
     if projeto:
         print(f"Projeto encontrado: {projeto}")
     else:
         print("Projeto não encontrado.")
+    input("Pressione Enter para continuar...")
         
 def cadastrar_participacao():
     """ Função para cadastrar uma participação. """
@@ -178,6 +185,7 @@ def listar_participacoes():
     participacoes = repositorio_participacoes.listar_participacoes()
     for participacao in participacoes:
         print(participacao)
+    input("Pressione Enter para continuar...")
     
 def buscar_participacao():
     """ Funcao para buscar todos os alunos participantes de um projeto ou
@@ -194,12 +202,19 @@ def buscar_participacao():
                 print(participacao)
         else:
             print("Nenhuma participação encontrada para esse aluno.")
+        input("Pressione Enter para continuar...")
     elif escolha == "2":
-        codigo = int(input("Digite o código do projeto: "))
+        try:
+            codigo = int(input("Digite o código do projeto: "))
+        except ValueError:
+            print("Código inválido. Digite apenas números.")
+            return
         participacoes = repositorio_participacoes.buscar_participacoes_por_projeto(codigo)
         if participacoes:
             for participacao in participacoes:
                 print(participacao)
         else:
             print("Nenhum aluno encontrado para esse projeto.")
+        input("Pressione Enter para continuar...")
+    
             
