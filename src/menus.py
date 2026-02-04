@@ -115,7 +115,11 @@ def cadastrar_projeto():
     """ Função para cadastrar um projeto. """
     while True:
         try: 
-            codigo = int(input("Digite o código do projeto: "))
+            try: 
+                codigo = int(input("Digite o código do projeto: "))
+            except ValueError:
+                print("Código inválido. Digite apenas números.")
+                continue
             titulo = input("Digite o título do projeto: ")
             responsavel = input("Digite o responsável pelo projeto: ")
             projeto = Projeto(codigo, titulo, responsavel)
